@@ -54,6 +54,30 @@
 - Planned separate routes for authentication, historical places, guides, bookings, and reviews.
 - Studied the use of routers and middleware for handling API requests.
 
+
+## Week 4: API Development and Backend Integration
+
+### Work Done
+- Continued the backend development of the Tourism Guide Planner project.
+- Created the authentication middleware to protect APIs that require users to be logged in.
+- Connected the authentication middleware with protected routes.
+- Completed the authentication APIs for signup, login, and logout.
+- Created the Historical Places router for adding, viewing, updating, and deleting historical places.
+- Created the Guide router for viewing and searching available guides.
+- Created the Booking router for booking guides and managing booking requests.
+- Added booking status functionality such as pending, accepted, rejected, cancelled, and completed.
+- Created the Review router for adding and viewing reviews and ratings for guides.
+- Connected the different routers with the main `app.js` file.
+- Used MongoDB and Mongoose to store and retrieve project data.
+- Started testing the backend APIs and checking the request and response flow.
+
+### Outcome
+- Completed the main backend routers of the Tourism Guide Planner project.
+- Added authentication and protected important APIs using middleware.
+- Created the main API flow for historical places, guides, bookings, and reviews.
+- Improved understanding of how routers, middleware, models, and MongoDB work together.
+- Prepared the backend for API testing and future frontend integration.
+
 ### Outcome
 - Completed the main database models for the project.
 - Created the basic backend structure for further API development.
