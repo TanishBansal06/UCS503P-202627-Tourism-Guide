@@ -1,0 +1,801 @@
+# 🌍 Tourism Guide Planner
+
+> **Explore History. Discover Places. Connect with Local Guides.**
+
+Tourism Guide Planner is a web-based tourism platform designed to help **foreign tourists explore historical places**, understand their history, and connect with local guides.
+
+The platform brings historical information, guide booking, AI-powered assistance, and tourist experiences together in one place.
+
+---
+
+## 📌 Table of Contents
+
+* [About the Project](#-about-the-project)
+* [Problem Statement](#-problem-statement)
+* [Our Solution](#-our-solution)
+* [Key Features](#-key-features)
+* [How It Works](#-how-it-works)
+* [Project Workflow](#-project-workflow)
+* [System Architecture](#-system-architecture)
+* [Tech Stack](#-tech-stack)
+* [User Roles](#-user-roles)
+* [AI Chatbot](#-ai-chatbot)
+* [Guide Booking](#-guide-booking)
+* [Scalability](#-scalability)
+* [Future Scope](#-future-scope)
+* [Team Structure](#-team-structure)
+* [Project Structure](#-project-structure)
+* [Getting Started](#-getting-started)
+* [Development Roadmap](#-development-roadmap)
+* [Contributing](#-contributing)
+* [License](#-license)
+
+---
+
+# 🚀 About the Project
+
+Foreign tourists visiting historical places often have difficulty finding reliable historical information and trustworthy local guides.
+
+**Tourism Guide Planner** provides a single platform where tourists can:
+
+* Search for historical places
+* Learn about their history and significance
+* Explore important attractions
+* Ask questions using an AI chatbot
+* Find and book local guides
+* Upload and share their travel photos
+* Get a more informative and personalized travel experience
+
+The goal is to make historical tourism **simple, informative, and accessible for international visitors**.
+
+---
+
+# ❗ Problem Statement
+
+Foreign tourists visiting historical destinations may face several problems:
+
+* 📖 Lack of easily accessible historical information
+* 🔎 Difficulty finding information about specific historical places
+* 👨‍🏫 Difficulty finding trustworthy local guides
+* 💰 Unclear guide pricing
+* 🌐 Language and communication barriers
+* ❓ No immediate way to ask questions about a historical place
+* 📸 No dedicated platform to share their travel experience
+
+Tourism Guide Planner aims to solve these problems through a single digital platform.
+
+---
+
+# 💡 Our Solution
+
+Our platform combines **historical information + guide booking + AI assistance**.
+
+### 🏛️ 1. Historical Places Explorer
+
+Tourists can search and explore historical destinations.
+
+Each place can contain:
+
+* Name
+* Location
+* Historical background
+* Construction/history details
+* Cultural significance
+* Important events
+* Interesting facts
+* Images
+* Visiting information
+
+---
+
+### 📖 2. Digital Guide Book
+
+Every historical destination can have its own digital guide book.
+
+Tourists can read information about the place before or during their visit.
+
+Example:
+
+```text
+Historical Place
+       │
+       ▼
+   Introduction
+       │
+       ├── History
+       ├── Architecture
+       ├── Important Events
+       ├── Cultural Importance
+       ├── Interesting Facts
+       └── Things to See
+```
+
+---
+
+### 👨‍🏫 3. Hire a Local Guide
+
+Tourists can find local guides directly through the website.
+
+They can view:
+
+* Guide name
+* Profile photo
+* Experience
+* Languages spoken
+* Rating
+* Reviews
+* Price
+* Availability
+
+The tourist can then select a guide and request/book a tour.
+
+---
+
+### 🤖 4. AI Historical Chatbot
+
+The website includes an AI chatbot where tourists can ask questions about historical places.
+
+For example:
+
+> **Tourist:** Who built the Taj Mahal?
+
+> **AI:** The Taj Mahal was commissioned by Mughal emperor Shah Jahan in memory of his wife Mumtaz Mahal.
+
+Tourists can ask questions such as:
+
+* Who built this monument?
+* When was it built?
+* Why was it built?
+* What happened here historically?
+* What is special about its architecture?
+* What should I see here?
+
+The chatbot is designed to provide quick and easy-to-understand information.
+
+---
+
+### 📸 5. Tourist Photo Upload
+
+Tourists can upload photos from their visits.
+
+This allows the platform to become more than an information website by creating a **tourist experience and community layer**.
+
+Possible features include:
+
+* Upload travel photos
+* Add captions
+* Associate photos with historical places
+* View photos from other tourists
+* Share travel experiences
+
+---
+
+# ✨ Key Features
+
+| Feature               | Description                           |
+| --------------------- | ------------------------------------- |
+| 🏛️ Historical Places | Explore historical destinations       |
+| 🔎 Search             | Search for historical places          |
+| 📖 Guide Book         | Read detailed historical information  |
+| 👨‍🏫 Hire Guide      | Find and book local guides            |
+| ⭐ Guide Ratings       | View guide ratings and reviews        |
+| 🌐 Guide Languages    | Find guides based on language         |
+| 🤖 AI Chatbot         | Ask questions about historical places |
+| 📸 Photo Upload       | Upload and share travel photos        |
+| 📍 Location           | View destination location             |
+| 🌍 Tourist Friendly   | Designed for foreign visitors         |
+
+---
+
+# 🔄 How It Works
+
+```text
+                    ┌──────────────────┐
+                    │     TOURIST      │
+                    └────────┬─────────┘
+                             │
+                             ▼
+                  ┌─────────────────────┐
+                  │ Search Historical   │
+                  │      Places         │
+                  └─────────┬───────────┘
+                            │
+             ┌──────────────┼──────────────┐
+             ▼              ▼              ▼
+       ┌───────────┐  ┌────────────┐  ┌────────────┐
+       │Guide Book │  │ Hire Guide │  │AI Chatbot  │
+       └───────────┘  └──────┬─────┘  └────────────┘
+                             │
+                             ▼
+                      ┌─────────────┐
+                      │Book Guide   │
+                      └─────────────┘
+                             │
+                             ▼
+                       Visit Place
+                             │
+                             ▼
+                     Upload Photos
+                             │
+                             ▼
+                    Share Experience
+```
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                     TOURIST
+                        │
+                        ▼
+              ┌───────────────────┐
+              │     Frontend      │
+              │ React / Next.js   │
+              └─────────┬─────────┘
+                        │
+                        ▼
+              ┌───────────────────┐
+              │      Backend      │
+              │ Node.js / Express │
+              └─────────┬─────────┘
+                        │
+          ┌─────────────┼─────────────┐
+          │             │             │
+          ▼             ▼             ▼
+    ┌──────────┐  ┌───────────┐  ┌──────────┐
+    │ Database │  │ AI Service │  │ Maps API │
+    └──────────┘  └───────────┘  └──────────┘
+          │             │             │
+          └─────────────┼─────────────┘
+                        │
+                        ▼
+               ┌─────────────────┐
+               │ External Storage│
+               │ Photos / Media  │
+               └─────────────────┘
+```
+
+---
+
+# 🛠️ Tech Stack
+
+## 🎨 Frontend
+
+* **React.js / Next.js**
+* **HTML5**
+* **CSS3 / Tailwind CSS**
+* **JavaScript**
+* Responsive design
+
+## ⚙️ Backend
+
+* **Node.js**
+* **Express.js**
+* REST APIs
+
+## 🗄️ Database
+
+Depending on implementation:
+
+* **MongoDB** or
+* **PostgreSQL**
+
+The database stores:
+
+* Users
+* Historical places
+* Guides
+* Guide availability
+* Bookings
+* Reviews
+* Tourist photos
+* Chat-related data
+
+## 🤖 AI
+
+* **OpenAI API / LLM**
+* AI chatbot
+* Historical place question answering
+* Future AI recommendation features
+
+## 📍 Maps
+
+* **Google Maps API**
+
+Used for:
+
+* Historical place locations
+* Map display
+* Navigation
+* Location-based information
+
+## ☁️ Deployment
+
+Potential deployment technologies:
+
+* **Vercel**
+* **AWS**
+* Cloud database
+* Cloud image/file storage
+
+---
+
+# 👥 User Roles
+
+## 👤 Tourist
+
+Tourists can:
+
+* Register/login
+* Search historical places
+* Read historical information
+* Use the digital guide book
+* Ask questions to the AI chatbot
+* Search for guides
+* View guide profiles
+* Book/request guides
+* Upload travel photos
+* Share experiences
+
+---
+
+## 👨‍🏫 Guide
+
+Guides can:
+
+* Create a guide profile
+* Add experience
+* Add languages
+* Set pricing
+* Set availability
+* Receive booking requests
+* Manage bookings
+* Receive tourist reviews
+
+---
+
+## 🛡️ Admin
+
+Admins manage the platform.
+
+They can:
+
+* Add historical places
+* Edit historical information
+* Manage tourists
+* Verify guides
+* Manage guide profiles
+* Manage bookings
+* Manage uploaded content
+* Monitor reviews
+* Remove inappropriate content
+
+---
+
+# 🤖 AI Chatbot
+
+The AI chatbot is one of the main features of Tourism Guide Planner.
+
+### User Flow
+
+```text
+Tourist
+   │
+   ▼
+Open AI Chatbot
+   │
+   ▼
+Ask Question
+   │
+   ▼
+AI Processes Question
+   │
+   ▼
+Historical Knowledge
+   │
+   ▼
+Generate Answer
+   │
+   ▼
+Tourist Gets Response
+```
+
+### Example Questions
+
+```text
+"What is the history of this place?"
+
+"Who built this monument?"
+
+"When was it constructed?"
+
+"Why is this place famous?"
+
+"What are the most important things to see?"
+
+"Tell me an interesting fact about this monument."
+```
+
+---
+
+# 👨‍🏫 Guide Booking
+
+The guide booking system connects tourists with local guides.
+
+```text
+Tourist
+   │
+   ▼
+Select Historical Place
+   │
+   ▼
+Click "Hire a Guide"
+   │
+   ▼
+View Available Guides
+   │
+   ├── Name
+   ├── Languages
+   ├── Experience
+   ├── Rating
+   ├── Price
+   └── Availability
+   │
+   ▼
+Select Guide
+   │
+   ▼
+Choose Date / Time
+   │
+   ▼
+Booking Request
+   │
+   ▼
+Guide Confirmation
+   │
+   ▼
+Tour
+   │
+   ▼
+Review & Rating
+```
+
+---
+
+# 📈 Scalability
+
+Tourism Guide Planner is designed so that new features can be added as the platform grows.
+
+## 🎧 1. Audio Guide Book
+
+The current digital guide book can be expanded into an **audio guide system**.
+
+Tourists could listen to the history of a monument instead of reading it.
+
+```text
+Historical Place
+       │
+       ▼
+   Audio Guide
+       │
+       ├── History
+       ├── Architecture
+       ├── Important Events
+       └── Interesting Facts
+```
+
+This would be especially useful while tourists are physically exploring a monument.
+
+---
+
+## 📸 2. Tourist Photo Sharing
+
+The photo upload feature can be expanded into a travel community.
+
+Tourists could:
+
+* Upload photos
+* Add captions
+* Tag historical places
+* Share experiences
+* Like photos
+* Comment on experiences
+
+This can turn the platform into a community-driven tourism platform.
+
+---
+
+## 🌐 3. Multi-Language Support
+
+The platform can support multiple languages for international tourists.
+
+For example:
+
+```text
+English
+French
+German
+Spanish
+Japanese
+Korean
+Hindi
+...
+```
+
+The AI chatbot and historical guide book could eventually provide translated content.
+
+---
+
+## 🎙️ 4. AI + Audio
+
+In the future, AI-generated explanations could be converted into audio.
+
+```text
+Tourist Question
+       ↓
+AI Answer
+       ↓
+Text-to-Speech
+       ↓
+Audio Explanation
+```
+
+This creates an interactive AI audio guide.
+
+---
+
+## 📱 5. Mobile Application
+
+The website can later be converted into Android and iOS applications.
+
+Possible mobile features:
+
+* GPS-based historical places
+* Audio guides
+* Push notifications
+* Camera/photo uploads
+* Nearby attractions
+* Guide booking
+
+---
+
+## 📍 6. Location-Based Recommendations
+
+The platform can eventually recommend nearby historical places based on the tourist's location.
+
+```text
+Tourist Location
+       ↓
+Nearby Historical Places
+       ↓
+Distance + Interest
+       ↓
+Recommended Places
+```
+
+---
+
+## 🌍 7. Global Expansion
+
+The platform can start with historical places in one region and gradually expand to:
+
+```text
+Local Places
+     ↓
+City
+     ↓
+State
+     ↓
+Country
+     ↓
+International Destinations
+```
+
+This makes the platform scalable for historical and cultural tourism worldwide.
+
+---
+
+# 🔐 Security
+
+The platform should protect tourist and guide information through:
+
+* Secure authentication
+* Authorization and role-based access
+* Input validation
+* API security
+* HTTPS
+* Secure database access
+* Environment variables for API keys
+* Image upload validation
+* File size restrictions
+* Protection against malicious uploads
+
+---
+
+# 📂 Project Structure
+
+```text
+Tourism-Guide-Planner/
+│
+├── frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── hooks/
+│   └── assets/
+│
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   └── services/
+│
+├── ai/
+│   ├── chatbot/
+│   └── knowledge/
+│
+├── uploads/
+│
+├── docs/
+│
+├── .env.example
+├── .gitignore
+├── package.json
+└── README.md
+```
+
+---
+
+# 👨‍💻 Team Structure
+
+Our project is developed by a **3-member team**.
+
+| Member      | Main Responsibility                    |
+| ----------- | -------------------------------------- |
+| 👤 Member 1 | Frontend / UI / Historical Places      |
+| 👤 Member 2 | Backend / Database / Guide Booking     |
+| 👤 Member 3 | AI Chatbot / Guide Book / Photo Upload |
+
+The team can work using separate Git branches:
+
+```text
+main
+│
+├── frontend
+├── backend
+└── ai-features
+```
+
+All completed features are reviewed and merged into the `main` branch.
+
+---
+
+# 🧪 Development Roadmap
+
+## Phase 1 — Website Foundation
+
+* [ ] Project setup
+* [ ] Responsive UI
+* [ ] Authentication
+* [ ] Database setup
+* [ ] Historical place pages
+
+## Phase 2 — Guide System
+
+* [ ] Guide profiles
+* [ ] Guide search
+* [ ] Guide availability
+* [ ] Guide booking
+* [ ] Reviews and ratings
+
+## Phase 3 — AI
+
+* [ ] AI chatbot
+* [ ] Historical knowledge integration
+* [ ] Place-specific questions
+* [ ] Improved AI responses
+
+## Phase 4 — Tourist Experience
+
+* [ ] Tourist photo upload
+* [ ] Photo gallery
+* [ ] User experiences
+* [ ] Maps integration
+
+## Phase 5 — Scalability
+
+* [ ] Audio guide book
+* [ ] Multi-language support
+* [ ] AI voice/audio guide
+* [ ] Mobile application
+* [ ] Location-based recommendations
+* [ ] Global destination expansion
+
+---
+
+# 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/Tourism-Guide-Planner.git
+```
+
+### 2. Enter the project
+
+```bash
+cd Tourism-Guide-Planner
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure environment variables
+
+Create a `.env` file:
+
+```env
+DATABASE_URL=
+GOOGLE_MAPS_API_KEY=
+OPENAI_API_KEY=
+```
+
+### 5. Start the development server
+
+```bash
+npm run dev
+```
+
+---
+
+# 🤝 Contributing
+
+We are developing Tourism Guide Planner as a collaborative project.
+
+To contribute:
+
+```bash
+git checkout -b feature/your-feature
+```
+
+Make your changes:
+
+```bash
+git add .
+git commit -m "Add your feature"
+git push origin feature/your-feature
+```
+
+Then create a Pull Request and merge it into `main` after review.
+
+---
+
+# 🎯 Vision
+
+> **"We don't just want tourists to visit historical places — we want them to understand the stories behind them."**
+
+Tourism Guide Planner aims to make historical tourism more **informative, accessible, interactive, and convenient** for foreign tourists.
+
+By combining:
+
+**🏛️ Historical Places + 📖 Digital Guide Book + 👨‍🏫 Local Guides + 🤖 AI + 📸 Tourist Experiences**
+
+we want to create a complete digital platform for discovering and experiencing historical destinations.
+
+---
+
+# ⭐ Tourism Guide Planner
+
+### Explore History. Discover Places. Connect with Local Guides.
+
+🌍 **Explore**
+📖 **Learn**
+🤖 **Ask AI**
+👨‍🏫 **Hire a Guide**
+📸 **Share Your Journey**
+🎧 **Listen to History**
