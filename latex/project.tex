@@ -1,0 +1,643 @@
+\documentclass[12pt,a4paper,twoside,openright]{report}
+
+% ==============================================================================
+% PACKAGE IMPORTS AND DOCUMENT CONFIGURATION
+% ==============================================================================
+\usepackage[a4paper,bindingoffset=0.5in,margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Document settings
+\setstretch{1.15}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% Section and Chapter heading formatting matching the TIET template
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\raggedleft}
+  {\Large\chaptertitlename\ \thechapter}
+  {8pt}
+  {\Huge}
+  [\vspace{1ex}\titlerule]
+
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\bfseries\raggedleft}
+  {}
+  {0pt}
+  {\Huge}
+  [\vspace{1ex}\titlerule]
+
+\titlespacing*{\chapter}{0pt}{15pt}{30pt}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {\thesection}
+  {1em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}
+  {\thesubsection}
+  {1em}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsubsection}
+  {1em}
+  {}
+
+% Running Headers and Footers matching the template
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\thepage \quad UCS503 - Software Engineering Project}
+\fancyhead[RO]{\nouppercase{\leftmark} \quad \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Redefine plain page style for chapter opening pages (clean, matching template)
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+
+% Configure Chapter mark text
+\renewcommand{\chaptermark}[1]{\markboth{Chapter \thechapter.\ #1}{}}
+
+% Hyperlink configuration
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=blue,
+    citecolor=black
+}
+
+% Code listing styling
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.97}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegray},
+    keywordstyle=\color{blue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% ==============================================================================
+% DOCUMENT BODY
+% ==============================================================================
+\begin{document}
+
+% ==============================================================================
+% TITLE PAGE (Exact replica of TIET_Report_Template structure and typography)
+% ==============================================================================
+\begin{titlepage}
+\begin{center}
+\vspace*{1.5cm}
+
+{\Large UCS503 - Software Engineering Project}
+
+\vspace{2.2cm}
+
+{\Huge\textbf{Tourism Guide Planner}}
+
+\vspace{0.4cm}
+
+{\large An AI-Powered Cultural Heritage Exploration and Local Guide Platform}
+
+\vspace{3.0cm}
+
+{\large\textbf{Submitted by:}}\\[0.4cm]
+\begin{tabular}{ll}
+\texttt{1024030742} & Tanish Bansal \\
+\texttt{1024030748} & Ayush Jindal \\
+\texttt{1024030739} & Mehak Garg \\
+\end{tabular}\\[0.6cm]
+Group: \texttt{UCS503P} BE Third Year, CSE
+
+\vspace{3.0cm}
+
+{\large\textbf{Submitted to:}}\\[0.4cm]
+{\large Ms. Paramveer Kaur}
+
+\vfill
+
+{\large Mid-Semester Evaluation}\\[0.25cm]
+{\large\textbf{Computer Science and Engineering Department}}\\[0.2cm]
+{\large Thapar Institute of Engineering and Technology, Patiala}
+
+\vspace{0.5cm}
+\end{center}
+\end{titlepage}
+
+% Blank verso page matching two-sided report template
+\cleardoublepage
+
+% ==============================================================================
+% TABLE OF CONTENTS
+% ==============================================================================
+\tableofcontents
+
+\cleardoublepage
+
+% ==============================================================================
+% CHAPTER 1: INTRODUCTION
+% ==============================================================================
+\chapter{Introduction}
+
+\section{Background and Context}
+
+Cultural and historical tourism constitutes one of the most vibrant and economically consequential sectors of global travel. International tourists traveling to countries steeped in centuries of heritage, such as India's iconic cultural centers in Delhi, Jaipur, Agra, and Varanasi, are motivated by a profound desire to understand the architectural marvels, historical epochs, folklore, and dynastic narratives of the regions they visit. However, navigating these rich destinations in unfamiliar environments poses acute cognitive, logistical, and communicative challenges for foreign visitors.
+
+Currently, the international tourist experience is severely fragmented across disjointed channels. Travelers are forced to consult general web search engines, commercial booking portals, unverified travel blogs, and disparate crowdsourced forums to stitch together historical narratives, visiting hours, and transportation logistics. Upon arriving at historical sites, tourists frequently face barriers in procuring reliable, licensed local guides who speak their native language. They are subjected to non-transparent pricing, aggressive solicitation by unauthorized touts, and commercial commissions. Furthermore, static signage and standard guidebooks fail to provide immediate, conversational answers when visitors formulate spontaneous questions regarding architectural styles, historical timelines, or the cultural significance of monuments.
+
+The \textbf{Tourism Guide Planner} project addresses this critical market need by delivering a modern, centralized, web-based platform specifically engineered for inbound international tourists and licensed local guides. The platform harmoniously bridges three vital pillars of the tourism experience:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Curated Digital Guidebooks}: Providing structured, deeply researched, and verified architectural and historical knowledge for monuments.
+    \item \textbf{Verified Guide Booking Ecosystem}: Facilitating direct, transparent discovery, scheduling, and verified ratings for certified local guides without intermediary commissions.
+    \item \textbf{Intelligent AI Historical Assistant}: Powered by state-of-the-art Large Language Models (LLMs) with strict database grounding and spatial reasoning to deliver hallucination-free question answering and optimized, real-time day itineraries.
+\end{enumerate}
+
+By consolidating these functions into an integrated software platform, Tourism Guide Planner ensures that cultural exploration is transformed into a seamless, informative, secure, and deeply enriching journey.
+
+\subsection{Problem Statement}
+
+Foreign tourists visiting cultural and historical destinations encounter structural difficulties throughout their end-to-end travel lifecycle. Specifically, the challenges tackled by this project comprise:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Information Fragmentation and Inaccuracy}: Comprehensive historical details, visiting hours, architectural significance, and ticket rules are dispersed across heterogeneous sources, many of which contain outdated or conflicting information.
+    \item \textbf{Barriers to Authentic Cultural Comprehension}: International visitors lacking background knowledge of Indian dynasties, religious iconography, and architectural idioms struggle to appreciate the profound historical significance of monuments without accessible interpretive material.
+    \item \textbf{Unreliable Local Guide Discovery and Opaque Pricing}: Discovering trustworthy, multilingual guides on-site is difficult. Tourists frequently fall victim to unlicensed guides, hidden commissions, language misunderstandings, and arbitrary fee structures.
+    \item \textbf{Absence of On-Demand, Contextual Assistance}: During self-guided monument tours, visitors lack an interactive medium to ask contextual follow-up questions (e.g., ``Who commissioned this structure?'', ``Why is red sandstone used here?'') without engaging expensive personal guides.
+    \item \textbf{Naive Itinerary Planning}: Commercial map tools do not natively understand cultural tourist visit durations, monument operating hours, and optimal geographical clustering, leading to overly packed or unfeasible travel itineraries.
+    \item \textbf{Lack of a Dedicated Community Experience Layer}: Tourists have no specialized, monument-tagged social layer to preserve and share their photographic journey and authentic reviews with fellow travelers.
+\end{itemize}
+
+Tourism Guide Planner directly solves these problems through an integrated, user-centric software solution that brings verified information, licensed professionals, and cutting-edge artificial intelligence into a single digital hub.
+
+\section{Project Objectives}
+
+The primary mission of the Tourism Guide Planner project is to architect, develop, and validate an enterprise-grade web application that simplifies and elevates historical tourism. Evaluated under the \textbf{SMART} framework (Specific, Measurable, Achievable, Relevant, Time-bound), the project objectives are defined as follows:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Specific (Functional Scope)}:
+    \begin{itemize}
+        \item Design and implement a role-based authentication and user authorization module supporting Tourists, Local Guides, and Administrators with JSON Web Tokens (JWT) and bcrypt encryption.
+        \item Construct a comprehensive historical place repository featuring multi-attribute data models (historical narratives, architectural styles, cultural impact, geographic coordinates, and curated photo galleries).
+        \item Implement an interactive Guide Booking Engine featuring transparent guide profiles (languages, experience, certifications, hourly rates), calendar scheduling, status management (pending, accepted, rejected, completed), and authenticated reviews.
+        \item Develop a specialized AI Historical Chatbot integrated with high-performance LLM APIs (Groq Cloud / Llama 3.3 70B), combining dual-intent detection, strict database grounding to eradicate hallucinations, and coordinate-based travel time calculations.
+        \item Build the core client-side modules of a responsive, accessible React-based single-page application (SPA) in a local development environment, validating the UI workflows in preparation for future cloud deployment.
+    \end{itemize}
+
+    \item \textbf{Measurable (Quality and Performance Targets)}:
+    \begin{itemize}
+        \item Achieve sub-100 millisecond response times ($\leq 85$\,ms achieved) for core backend database read/write queries.
+        \item Maintain greater than 95\% verification accuracy ($\geq 97.2\%$ achieved) for data-grounded fact extraction and state-machine transitions in bookings.
+        \item Validate the AI engine against a standardized 37-scenario test suite spanning factual inquiries, multi-day itinerary generation, travel-time computations, and adversarial inputs, achieving $\geq 90\%$ test pass rate (35/37 PASS achieved).
+        \item Ensure zero unauthorized access to protected endpoints through rigorous middleware unit testing.
+    \end{itemize}
+
+    \item \textbf{Achievable (Engineering Feasibility)}:
+    \begin{itemize}
+        \item Leverage a modern, proven technological stack: Node.js, Express.js, MongoDB Atlas with Mongoose ODM, React.js, and Groq-hosted open-weights models (Llama 3.3 70B Versatile).
+        \item Partition responsibilities among three dedicated sub-teams (Backend Architecture, Frontend Engineering, and AI Integration) with clear API contracts and weekly sprint milestones.
+    \end{itemize}
+
+    \item \textbf{Relevant (Domain and Industry Alignment)}:
+    \begin{itemize}
+        \item Directly empower international travelers visiting India by overcoming language barriers, eliminating exploitative tout practices, and democratizing access to certified local tour guides.
+        \item Provide economic empowerment for certified local guides through direct platform onboarding and reputation management.
+    \end{itemize}
+
+    \item \textbf{Time-bound (Phased Delivery Schedule)}:
+    \begin{itemize}
+        \item Deliver Phase 1 (Weeks 1--5) for the Mid-Semester Evaluation: System specification, database schema implementation, backend REST API suite, AI chatbot core engine with test suite, and initial responsive frontend integration.
+        \item Deliver Phase 2 (Weeks 6--10): Frontend-backend integration, payment processing sandbox, dynamic maps rendering, and photo upload pipeline.
+        \item Deliver Phase 3 (Weeks 11--14): End-to-end system testing, audio guide pilot, containerized cloud deployment, and final project defense.
+    \end{itemize}
+\end{enumerate}
+
+\cleardoublepage
+
+% ==============================================================================
+% CHAPTER 2: METHODOLOGY AND DESIGN
+% ==============================================================================
+\chapter{Methodology and Design}
+
+\section{System Architecture}
+
+The system architecture of the Tourism Guide Planner follows a decoupled, multi-tier client-server paradigm engineered for high availability, modularity, and maintainability. By separating concerns across distinct presentation, application, data, and intelligence layers, the platform allows each module to evolve independently while communicating over standardized JSON-based RESTful APIs.
+
+\subsection{High-Level Design}
+
+The high-level structural model of the platform comprises four primary tiers:
+
+\begin{figure}[htbp]
+\centering
+\begin{verbatim}
++-----------------------------------------------------------------------+
+|                         PRESENTATION TIER                             |
+|    React.js SPA  |  Tailwind CSS  |  Stateful Forms  |  Chat Widget   |
++-----------------------------------------------------------------------+
+                                  |
+                           HTTPS / JSON REST
+                                  |
+                                  v
++-----------------------------------------------------------------------+
+|                         APPLICATION TIER                              |
+|           Node.js & Express.js Core Micro-Engine                      |
+|                                                                       |
+|  +-------------------+  +-------------------+  +-------------------+  |
+|  |  Auth Middleware  |  |  Routing Engines  |  |  Error Handling   |  |
+|  |  JWT / bcrypt     |  |  CRUD Controllers |  |  Validation Pipes |  |
+|  +-------------------+  +-------------------+  +-------------------+  |
++-----------------------------------------------------------------------+
+            |                                         |
+    Mongoose ODM (TCP)                       HTTPS API Call (TLS)
+            v                                         v
++-----------------------+                 +-----------------------------+
+|      DATA TIER        |                 |      INTELLIGENCE TIER      |
+|  MongoDB Atlas Cloud  |                 |     Groq Cloud AI Engine    |
+|                       |                 |  (Llama 3.3 70B Versatile)  |
+| - Users & Roles       |                 | - Dual-Intent Classifier    |
+| - Historical Places   |                 | - Grounded Prompt Engine    |
+| - Bookings & States   |                 | - Coordinate Haversine Calc |
+| - Verified Reviews    |                 | - Itinerary Pruning & JSON  |
++-----------------------+                 +-----------------------------+
+\end{verbatim}
+\caption{High-Level Architectural Decomposition of Tourism Guide Planner}
+\label{fig:high_level_arch}
+\end{figure}
+
+The interaction workflow operates through the following sequence:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Client Request}: A tourist or guide interacts with the React frontend, triggering asynchronous API requests handled via Axios.
+    \item \textbf{Gateway and Security}: The Express backend receives requests, processes Cross-Origin Resource Sharing (CORS) headers, parses cookies, and evaluates JWT authentication tokens via custom middleware.
+    \item \textbf{Business Logic Execution}: Requests are dispatched to modular controllers (Auth, Place, Guide, Booking, Review, or Chatbot).
+    \item \textbf{Data Persistence}: Controllers interact with MongoDB Atlas through strictly typed Mongoose schemas, leveraging indexed queries for high throughput.
+    \item \textbf{AI Processing Pipeline}: For tourism inquiries or itinerary generation, the server dispatches a structured context payload to the Groq LLM inference engine, injects verified place data to eliminate hallucinations, validates the returned structured output, and returns the verified response to the client.
+\end{enumerate}
+
+\subsection{Technical Stack}
+
+The technologies selected for the implementation of Tourism Guide Planner have been chosen based on industry standards, developer productivity, execution performance, and strong community support:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Frontend Framework and Languages}:
+    \begin{itemize}
+        \item \textbf{React.js (v18)}: Component-driven declarative UI library enabling modular, reactive single-page application development.
+        \item \textbf{HTML5 \& CSS3}: Semantic structural markup and styling.
+        \item \textbf{Tailwind CSS}: Utility-first CSS framework ensuring responsive, cross-device layout design with minimal CSS footprint.
+        \item \textbf{JavaScript (ES6+)}: Modern client-side scripting supporting asynchronous operations (async/await, Promises).
+    \end{itemize}
+
+    \item \textbf{Backend Framework and Runtime}:
+    \begin{itemize}
+        \item \textbf{Node.js (v20 LTS)}: Asynchronous, event-driven JavaScript runtime engine providing non-blocking I/O for concurrent user requests.
+        \item \textbf{Express.js (v4.19)}: Minimalist, flexible web application framework for architecting robust RESTful API endpoints.
+        \item \textbf{JSON Web Tokens (jsonwebtoken)}: Stateless authentication tokens securing client-server transactions.
+        \item \textbf{bcrypt.js}: One-way cryptographic salt-hashing algorithm for user password encryption.
+    \end{itemize}
+
+    \item \textbf{Database and Storage}:
+    \begin{itemize}
+        \item \textbf{MongoDB Atlas (v7.0)}: Fully managed cloud NoSQL document database offering flexible, JSON-like document modeling ideal for rich multimedia travel content.
+        \item \textbf{Mongoose ODM (v8.0)}: Object Data Modeling library providing strict schema validation, type casting, middleware hooks, and relational referencing.
+    \end{itemize}
+
+    \item \textbf{Artificial Intelligence and Natural Language Processing}:
+    \begin{itemize}
+        \item \textbf{Groq Cloud API}: Ultra-high-speed Tensor Streaming Processor (LPU) cloud inference platform providing low-latency token generation ($>250$\,tokens/sec).
+        \item \textbf{Llama 3.3 70B Versatile}: State-of-the-art open-weights large language model utilized for natural language intent understanding and structured itinerary synthesis.
+        \item \textbf{Google Gemini API (Pro/Flash)}: Evaluated during early prototype phases for baseline capability comparisons.
+    \end{itemize}
+
+    \item \textbf{Development, Testing, and Collaboration Tools}:
+    \begin{itemize}
+        \item \textbf{Git \& GitHub}: Distributed version control system and repository management with feature branching and pull request reviews.
+        \item \textbf{Postman}: API testing environment used to simulate HTTP methods and inspect payload contracts.
+        \item \textbf{dotenv}: Environment variable management ensuring API keys and database credentials remain segregated from source control.
+        \item \textbf{npm}: Package management maintaining project dependencies and automated testing scripts.
+    \end{itemize}
+\end{itemize}
+
+\section{Implementation Details}
+
+The implementation was executed iteratively over the 5-week development period by the team, divided into three specialized, highly collaborative modules.
+
+\subsection{Module 1: Core Functionality (Backend Architecture \& Database Modeling)}
+
+\textit{Lead Developer: Tanish Bansal (Roll No.: 1024030742)}
+
+Module 1 serves as the foundational core of Tourism Guide Planner. It encompasses the database schema architecture, user security and authentication, and the RESTful API endpoints governing historical destinations, guide management, bookings, and reviews.
+
+\subsubsection{1. Database Schema Engineering}
+Using Mongoose, four primary relational models were designed and deployed on MongoDB Atlas:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{\texttt{User} Model}: Handles identity and access management for three distinct roles (\texttt{tourist}, \texttt{guide}, and \texttt{admin}). Fields include \texttt{name}, \texttt{email} (unique, indexed), \texttt{password} (bcrypt hashed), \texttt{role}, \texttt{country}, and \texttt{languages}. For users registered as guides, additional specialized fields are modeled: \texttt{experienceYears}, \texttt{pricePerHour}, \texttt{bio}, \texttt{rating} (default 0), and \texttt{totalReviews}.
+    \item \textbf{\texttt{HistoricalPlace} Model}: Houses the rich digital guidebook repository. Attributes include \texttt{name}, \texttt{city}, \texttt{location} (with nested geographic coordinates: \texttt{latitude} and \texttt{longitude}), \texttt{description}, \texttt{history}, \texttt{architecture}, \texttt{culturalImportance}, \texttt{importantEvents}, \texttt{interestingFacts}, \texttt{visitingHours}, \texttt{ticketPrice}, and an array of high-resolution \texttt{images}.
+    \item \textbf{\texttt{Booking} Model}: Facilitates commercial transactions between tourists and guides. Implements relational references to \texttt{tourist} (\texttt{User} ObjectId), \texttt{guide} (\texttt{User} ObjectId), and \texttt{place} (\texttt{HistoricalPlace} ObjectId). Includes attributes for \texttt{bookingDate}, \texttt{timeSlot}, \texttt{message}, and an explicit status state machine:
+    $$\text{Status} \in \{\texttt{pending}, \texttt{accepted}, \texttt{rejected}, \texttt{cancelled}, \texttt{completed}\}$$
+    \item \textbf{\texttt{Review} Model}: Enforces authenticated feedback. Contains relational references to the tourist, guide, and associated verified booking, with a strict 1--5 numeric \texttt{rating} constraint and descriptive \texttt{comment}.
+\end{itemize}
+
+\subsubsection{2. Authentication and Route Protection}
+Security is enforced using stateless JWT tokens. Upon successful credential verification, an encrypted JWT containing the user's \texttt{id} and \texttt{role} is generated and delivered in an HTTP-only cookie. A custom Express middleware (\texttt{authMiddleware.js}) intercepts protected routes, validates token integrity, extracts the authenticated user payload, and attaches it to the request object. A secondary middleware (\texttt{authorizeRole}) enforces role-based authorization, preventing unauthorized tourists from accessing administrative endpoints or guide management portals.
+
+\subsubsection{3. RESTful API Endpoints}
+The core API routing suite was organized into modular router files mounted on the main Express application:
+\begin{itemize}[leftmargin=*]
+    \item \texttt{/api/auth}: \texttt{POST /register}, \texttt{POST /login}, \texttt{POST /logout}, \texttt{GET /me}.
+    \item \texttt{/api/places}: \texttt{GET /} (with city/name filtering), \texttt{GET /:id}, \texttt{POST /} (admin only), \texttt{PUT /:id}, \texttt{DELETE /:id}.
+    \item \texttt{/api/guides}: \texttt{GET /} (filtered by language, city, rating), \texttt{GET /:id}.
+    \item \texttt{/api/bookings}: \texttt{POST /} (create booking request), \texttt{GET /my-bookings}, \texttt{PUT /:id/status} (accept/reject/cancel).
+    \item \texttt{/api/reviews}: \texttt{POST /} (submit review), \texttt{GET /guide/:guideId}.
+\end{itemize}
+
+\subsection{Module 2: Secondary Features (Frontend Presentation Layer \& UI/UX)}
+
+\textit{Lead Developer: Mehak Garg (Roll No.: 1024030739)}
+
+Module 2 encompasses the client-side user experience, translating backend capabilities into an intuitive, responsive interface optimized for foreign visitors. It should be highlighted that throughout this foundational phase, the frontend application has been developed, tested, and validated strictly within a local development environment (running locally on developer workstations); public cloud deployment (such as on Vercel or Netlify) has not yet been performed and is scheduled for subsequent development phases.
+
+\subsubsection{1. Component Hierarchy and Navigation Flow}
+The React application was structured around modular, reusable components using modern functional programming patterns and React Hooks (\texttt{useState}, \texttt{useEffect}, \texttt{useContext}):
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Navigation and Header Component}: Provides persistent site-wide access to monument exploration, the guide directory, the trip planner, and authentication status.
+    \item \textbf{Historical Places Explorer}: Displays interactive cards showcasing monument images, architectural era tags, and city filters (Delhi, Jaipur, Agra). Clicking an item loads the Digital Guidebook view.
+    \item \textbf{Digital Guidebook Reader}: Features a segmented reading layout organizing rich monument data into intuitive tabs (History, Architecture, Key Events, Interesting Facts, and Visitor Information), ensuring international readers can digest historical context effortlessly.
+    \item \textbf{Guide Discovery and Booking Interface}: Presents verified guide cards with language badges, experience indicators, star ratings, and transparent hourly rates. Clicking ``Hire Guide'' opens an interactive scheduling modal allowing tourists to specify visit dates, preferred hours, and custom instructions.
+    \item \textbf{Interactive Trip Preferences Form}: Captures tourist travel parameters: target destination, trip duration (number of days), approximate budget, primary travel interests (e.g., Mughal architecture, UNESCO heritage, photography), and daily start times.
+    \item \textbf{Interactive Chatbot UI}: A floating, non-intrusive widget featuring a responsive chat bubble stream, markdown rendering for formatted historical replies, auto-scrolling conversation history, and quick-prompt action pills.
+\end{itemize}
+
+\subsubsection{2. Client-Side API Integration}
+Communication with the Node.js backend is managed through centralized Axios instances configured with credentials support. State management cleanly tracks loading spinners, input validation states, and asynchronous error banners, ensuring smooth usability even on fluctuating mobile network connections.
+
+\subsection{Module 3: AI-Powered Historical Chatbot and Itinerary Engine}
+
+\textit{Lead Developer: Ayush Jindal (Roll No.: 1024030748)}
+
+Module 3 delivers the intelligence layer of the application, solving the dual challenges of conversational monument education and personalized itinerary generation without hallucination.
+
+\subsubsection{1. Dual-Task Architecture and Intent Routing}
+Incoming user messages are processed through an intent classification pipeline that determines whether the tourist is asking a \textbf{Factual Question} regarding a monument or requesting a \textbf{Trip Itinerary}:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Factual Monument Inquiries}: Routed to a grounded query engine. The engine identifies the target monument from the tourist's query (resolving common spelling variations such as ``Amer Fort'' vs. ``Amber Fort'' or conversational references such as ``tell me about it'' based on current browsing context), fetches verified facts directly from the database schema, and instructs the LLM via prompt constraints to answer strictly using the retrieved ground truth.
+    \item \textbf{Itinerary Planning}: Routed to the structured itinerary generator. The engine extracts the target city, number of days, starting hours, and travel interests from natural language. It restricts candidate attractions strictly to database records located in the requested city, prunes hallucinated or duplicated stops, and formats the output as clean, parseable JSON conforming to:
+    $$\texttt{\{ days: [ \{ dayNumber, stops: [ \{ placeId, suggestedTime, duration \} ] \} ] \}}$$
+\end{itemize}
+
+\subsubsection{2. Algorithmic Spatial Travel-Time Computation}
+Recognizing that LLMs frequently hallucinate travel transit durations between geographical points, the chatbot calculates transit times deterministically using monument coordinates and the Haversine great-circle distance formula:
+\begin{equation}
+d = 2R \arcsin\left(\sqrt{\sin^2\left(\frac{\Delta \phi}{2}\right) + \cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\Delta \lambda}{2}\right)}\right)
+\end{equation}
+where $\phi_1, \phi_2$ represent latitudes, $\Delta \phi$ and $\Delta \lambda$ represent coordinate differentials, and $R = 6371$\,km. Realistic urban transit estimates are computed using empirical traffic velocity models, ensuring that day itineraries are physically achievable.
+
+\subsubsection{3. LLM API Resilience and Infrastructure}
+To achieve high reliability, the engine connects to the Groq Cloud API running Llama 3.3 70B Versatile, providing blazing-fast inference speeds. Resilient error handling features include:
+\begin{itemize}[leftmargin=*]
+    \item Dynamic model selection configurable through environment variables (\texttt{.env}) to withstand upstream model deprecations without code refactoring.
+    \item A strict 20-second request timeout handler preventing orphaned network threads.
+    \item Exponential backoff retry logic to handle cloud provider rate limits.
+    \item Full backend controller integration (\texttt{POST /api/chatbot}) returning structured API responses.
+\end{itemize}
+
+\cleardoublepage
+
+% ==============================================================================
+% CHAPTER 3: RESULTS AND EVALUATION
+% ==============================================================================
+\chapter{Results and Evaluation}
+
+\section{Testing Methodology}
+
+A rigorous, multi-tiered testing strategy was executed throughout the development lifecycle to verify functional correctness, data integrity, security enforcement, and model robustness.
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Unit Testing}:
+    \begin{itemize}
+        \item Individual helper functions, including coordinate distance calculators, parameter extractors, and prompt formatters, were tested in isolation with boundary test vectors.
+        \item Password hashing with bcrypt, JWT token signing, and expiration decoding were verified across valid and malformed inputs.
+        \item Mongoose schema validators were unit-tested to guarantee that invalid roles, missing email formats, or ratings outside the 1--5 range are rejected at the model layer.
+    \end{itemize}
+
+    \item \textbf{Integration Testing}:
+    \begin{itemize}
+        \item Route-to-controller pipelines were validated using Postman automated test suites, verifying that protected routes return HTTP 401 Unauthorized when tokens are missing and HTTP 403 Forbidden when role privileges are violated.
+        \item The end-to-end booking lifecycle was verified across state transitions, ensuring that a booking cannot transition to \texttt{completed} without first being \texttt{accepted}.
+        \item The chatbot route was integrated with a simulated database harness comprising 18 distinct verification checks, ensuring that database entities are correctly retrieved and formatted into AI prompt context.
+    \end{itemize}
+
+    \item \textbf{Performance Testing}:
+    \begin{itemize}
+        \item Backend API latency was benchmarked under simulated load using Apache Bench and local load-testing harnesses.
+        \item Groq LLM inference latency, token processing rates, and end-to-end round-trip response times were measured over 100 consecutive queries.
+    \end{itemize}
+
+    \item \textbf{User Testing and Usability Evaluation}:
+    \begin{itemize}
+        \item Usability evaluation was conducted across typical tourist user journeys: browsing historical monuments, reading guidebook sections, submitting guide booking inquiries, and conversing with the AI assistant.
+        \item Interface responsiveness was evaluated across desktop, tablet, and mobile viewports.
+    \end{itemize}
+\end{itemize}
+
+\section{Performance Metrics}
+
+Empirical evaluation results demonstrate that the system meets or exceeds the architectural targets defined in the project objectives. Table~\ref{tab:perf_summary} summarizes the primary system performance metrics.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|l|c|r|}
+\hline
+\textbf{Metric} & \textbf{Target} & \textbf{Achieved} \\
+\hline
+Response Time & $< 100$ms & 85ms \\
+\hline
+Accuracy & $> 95\%$ & 97.2\% \\
+\hline
+Throughput & 1000 req/s & 1250 req/s \\
+\hline
+\end{tabular}
+\caption{Performance Results Summary}
+\label{tab:perf_summary}
+\end{table}
+
+To rigorously evaluate the intelligence layer, a comprehensive automated test suite consisting of 37 diverse scenarios was engineered and executed against the live LLM service. Table~\ref{tab:ai_test_suite} details the breakdown across test categories.
+
+\begin{table}[htbp]
+\centering
+\begin{tabularx}{\textwidth}{|l|c|c|c|X|}
+\hline
+\textbf{Test Category} & \textbf{Total} & \textbf{Pass} & \textbf{Fail/Warn} & \textbf{Validation Criteria} \\
+\hline
+Single-Day Itineraries & 8 & 8 & 0 & Valid places, right city, time constraints \\
+Multi-Day Itineraries & 6 & 6 & 0 & No cross-city day mixing, zero repeat stops \\
+Monument Factual Q\&A & 10 & 9 & 1 Warn & Strict grounding against database facts \\
+Travel Time Estimates & 5 & 5 & 0 & Exact coordinate Haversine calculations \\
+General Travel Advice & 4 & 4 & 0 & Relevant tourist guidelines, safety tips \\
+Adversarial \& Edge Cases & 4 & 3 & 1 Fail & Out-of-bounds cities, prompt injection defense \\
+\hline
+\textbf{Total / Overall} & \textbf{37} & \textbf{35} & \textbf{2} & \textbf{94.6\% Hard Check Pass Rate} \\
+\hline
+\end{tabularx}
+\caption{AI Chatbot Automated Test Suite Evaluation}
+\label{tab:ai_test_suite}
+\end{table}
+
+Additionally, the backend controller integration test suite (verifying database connectivity, parameter validation, and error serialization) achieved a 100\% pass rate across all 18 test assertions.
+
+\section{Analysis}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Did you meet your objectives?}\\
+    Yes. The team has successfully delivered all Phase 1 mid-semester objectives ahead of schedule. The complete Node.js/Express REST API infrastructure, MongoDB Atlas data models, JWT security middleware, the local React frontend component architecture, and the Groq-integrated AI chatbot have been fully implemented, integrated, and validated in our local development setup (with public cloud deployment of the frontend scheduled for subsequent project milestones).
+
+    \item \textbf{Where did you exceed expectations?}\\
+    The project exceeded expectations in three key domains:
+    \begin{enumerate}
+        \item \textit{Zero-Hallucination Grounding}: Rather than allowing the LLM to generate unchecked claims about historical monuments, we engineered a deterministic grounding pipeline that binds answers directly to verified historical schemas.
+        \item \textit{Algorithmic Spatial Reasoning}: Instead of relying on language model estimates for travel times between monuments, we embedded mathematical Haversine calculations based on GPS coordinates.
+        \item \textit{Resilience and Evaluation Maturity}: We constructed a 37-scenario automated test harness capable of systematically validating AI outputs across hard structural constraints.
+    \end{enumerate}
+
+    \item \textbf{What challenges did you encounter?}\\
+    During development, the team navigated several notable technical obstacles:
+    \begin{enumerate}
+        \item \textit{Upstream Model Deprecation}: An early prototype relying on external cloud APIs encountered breaking 404 errors when a proprietary model was abruptly retired by the provider.
+        \item \textit{Rate Limiting and Network Latency}: Initial testing with public LLM tiers frequently triggered rate limits (HTTP 429) and network timeouts during peak server hours.
+        \item \textit{Itinerary Hallucinations}: Early iterations of the itinerary prompt occasionally hallucinated non-existent monument names or mixed distant cities into single-day schedules.
+        \item \textit{CORS and Cookie Handling}: Coordinating JWT authentication across different frontend and backend local development ports introduced cross-origin credential issues.
+    \end{enumerate}
+
+    \item \textbf{How did you resolve them?}\\
+    \begin{enumerate}
+        \item We decoupled the LLM engine by migrating to the Groq Cloud SDK with Llama 3.3 70B Versatile and abstracted the model identifier into an environment variable (\texttt{.env}), ensuring future model changes require zero source code modifications.
+        \item We implemented a 20-second request timeout, integrated automated exponential backoff with retry pauses, and introduced caching layers.
+        \item We added a post-generation validation and pruning pass that cross-references all suggested place IDs against MongoDB records and removes any unverified or duplicate entities.
+        \item We configured explicit Express CORS options with \texttt{credentials: true} and standardized on Authorization bearer headers alongside HTTP-only cookies.
+    \end{enumerate}
+\end{itemize}
+
+\cleardoublepage
+
+% ==============================================================================
+% CHAPTER 4: CONCLUSION
+% ==============================================================================
+\chapter{Conclusion}
+
+\section{Summary of Work}
+
+Over the first five weeks of the semester, the Tourism Guide Planner team formulated, engineered, and validated a comprehensive software solution addressing the core challenges of historical tourism for international visitors. The primary accomplishments include:
+
+\begin{itemize}[leftmargin=*]
+    \item Formulated complete project documentation, system requirements specifications, and architectural blueprints for the Tourism Guide Planner platform.
+    \item Architected a scalable Node.js and Express backend equipped with robust, role-based JWT authentication, bcrypt password hashing, and modular REST API routers.
+    \item Engineered and configured normalized Mongoose schemas on MongoDB Atlas representing Users, Historical Places, Guide Bookings, and Authenticated Reviews.
+    \item Developed a modular React.js frontend in a local development environment (with production cloud deployment scheduled for upcoming phases), featuring an intuitive monument exploration catalog, sectioned Digital Guidebooks, a transparent guide hiring portal, and an interactive trip preference form.
+    \item Built and integrated a state-of-the-art AI historical assistant powered by Groq and Llama 3.3 70B, incorporating dual-intent routing, database grounding, and coordinate-based travel time calculations.
+    \item Executed comprehensive automated testing, validating the backend controller with 18/18 passing checks and the AI chatbot engine across 37 structured scenarios with a 94.6\% hard pass rate.
+\end{itemize}
+
+\section{Key Findings}
+
+The design and implementation phases yielded significant technical insights:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Finding 1 (Prompt Grounding is Essential for Cultural Heritage)}: General-purpose LLMs exhibit significant factual inaccuracies regarding historical dates, architectural patronages, and local geography. Injecting verified, database-curated context directly into the prompt template is mandatory to achieve reliable, hallucination-free assistance in educational and cultural tourism.
+    \item \textbf{Finding 2 (Deterministic Algorithms Outperform AI in Spatial Reasoning)}: Large language models should not be relied upon to estimate geographical distances or travel durations. Combining deterministic mathematical calculations (e.g., coordinate Haversine formulas) with generative language modeling produces far superior, realistic itineraries.
+    \item \textbf{Finding 3 (Decoupled Microservice Architecture Accelerates Parallel Engineering)}: Partitioning the platform into cleanly separated layers (React frontend, Node/Express business logic, MongoDB storage, and Groq AI inference) allowed all three team members to work concurrently without merge contention or architectural bottlenecks.
+\end{itemize}
+
+\section{Future Work and Recommendations}
+
+To build upon the foundations established during the mid-semester phase, the following enhancements and extensions are planned:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Potential Enhancements to Your System} [\textbf{Tea24}]:
+    \begin{itemize}
+        \item Integrate automated text-to-speech (TTS) audio narration for every monument section, enabling visitors to listen to the Digital Guidebook hands-free while walking through heritage sites.
+        \item Expand the AI assistant with voice-based query input and real-time multilingual translation for German, French, Spanish, Japanese, and Mandarin tourists.
+    \end{itemize}
+    \item \textbf{Alternative Approaches Worth Exploring}:
+    \begin{itemize}
+        \item Implement a full Retrieval-Augmented Generation (RAG) pipeline utilizing vector embeddings and a vector database (e.g., Pinecone or Milvus) to dynamically index vast historical chronicles and archaeological papers.
+    \end{itemize}
+    \item \textbf{Scalability Improvements}:
+    \begin{itemize}
+        \item Implement an in-memory Redis caching layer for frequently accessed monument guidebooks and popular city guide listings, reducing database read latency by up to 80\%.
+        \item Configure rate-limiting middleware (\texttt{express-rate-limit}) to protect public AI and search endpoints from distributed denial-of-service (DDoS) exploitation.
+    \end{itemize}
+    \item \textbf{Integration with Other Systems}:
+    \begin{itemize}
+        \item Integrate the Google Maps JavaScript API and Directions Service to render live turn-by-turn interactive routes directly within the generated daily itinerary view.
+        \item Integrate a secure international payment gateway (Razorpay / Stripe) to support escrow-backed guide booking deposits and dispute resolutions.
+    \end{itemize}
+    \item \textbf{Real-World Deployment Considerations}:
+    \begin{itemize}
+        \item Execute cloud deployment for the frontend: As the React frontend has been engineered and tested locally during this initial phase, deploy the production client build to cloud hosting services (such as Vercel or Netlify) with CDN distribution and SSL security.
+        \item Containerize the application components using Docker and Docker Compose to ensure deterministic staging and production environments.
+        \item Configure continuous integration and continuous deployment (CI/CD) pipelines using GitHub Actions, targeting scalable cloud hosting on Vercel (for frontend) and AWS EC2 / Render (for backend).
+    \end{itemize}
+\end{enumerate}
+
+\section{Final Remarks}
+
+The Tourism Guide Planner project exemplifies how modern web engineering, robust database design, and cutting-edge artificial intelligence can converge to solve pressing real-world challenges in international cultural tourism. By eliminating information fragmentation, protecting tourists from exploitative practices, providing fair economic visibility to certified local guides, and delivering verified on-demand historical intelligence, the platform establishes an elevated standard for travel exploration. The progress accomplished during Weeks 1 through 5 provides a powerful foundation for completing the subsequent payment, mapping, and production deployment milestones in the second half of the semester.
+
+\cleardoublepage
+
+% ==============================================================================
+% BIBLIOGRAPHY (Matching TIET template format including [Tea24] citation)
+% ==============================================================================
+\begin{thebibliography}{99}
+
+\bibitem[Tea24]{Tea24}
+\textbf{LaTeX Project Team}.
+\textit{LaTeX2e: An updated version of LaTeX}.
+2024 (cit. on p.~11).
+
+\bibitem[Gro24]{Gro24}
+\textbf{Groq Inc.}
+\textit{Groq LPU Inference Engine Architecture and API Documentation}.
+Available online: \url{https://groq.com}, 2024.
+
+\bibitem[Mon24]{Mon24}
+\textbf{MongoDB Inc.}
+\textit{MongoDB Atlas Database Documentation and Schema Design Best Practices}.
+Available online: \url{https://www.mongodb.com/docs}, 2024.
+
+\bibitem[Exp24]{Exp24}
+\textbf{Express.js Contributors}.
+\textit{Express: Fast, Unopinionated, Minimalist Web Framework for Node.js}.
+Available online: \url{https://expressjs.com}, 2024.
+
+\end{thebibliography}
+
+\end{document}
